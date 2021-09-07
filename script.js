@@ -15,13 +15,13 @@ window.addEventListener('load', () => {
             minutes = (date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes(),
             seconds = (date.getSeconds() < 10) ? '0' + date.getSeconds() : date.getSeconds();
         document.querySelector('.new-date').textContent = hours  + ':' + minutes + ':' + seconds;
-        if( hours > 0  && hours <= 4){
+        if( hours >= 0  && hours <= 4){
             body.classList.add('night');
-        }else if(hours > 5  && hours <= 9){
+        }else if(hours >= 5  && hours <= 9){
             body.classList.add('sunset');
-        }else if(hours > 10  && hours <= 17){
+        }else if(hours >= 10  && hours <= 17){
             body.classList.add('day');
-        }else if(hours > 18  && hours <= 23){
+        }else if(hours >= 18  && hours <= 23){
             body.classList.add('sunset');
         }
     };
