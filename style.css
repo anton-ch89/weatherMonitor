@@ -39,6 +39,10 @@ body {
     flex-direction: column;
 }
 
+.date {
+    margin-top: 10vh;
+}
+
 .value-section {
     display: flex;
     align-items: center;
