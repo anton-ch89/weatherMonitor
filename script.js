@@ -4,7 +4,8 @@ window.addEventListener('load', () => {
     let longit = null;
     let latet = null;
     const timezone = document.querySelector('.location-timezone');
-    const temperature = document.querySelector('.tempeature-value'),
+    const temperatureValue = document.querySelector('.tempeature-value'),
+    temperature = document.querySelector('.temperature'),
      description = document.querySelector('.temperature-description'),
      location = document.querySelector('.location'),
      body = document.querySelector('body'),
@@ -46,16 +47,16 @@ window.addEventListener('load', () => {
             const {main, name, weather} = data;
 
             timezone.textContent = name;
-            temperature.textContent = Math.round(main.temp-273.15);
+            temperatureValue.textContent = Math.round(main.temp-273.15);
             description.textContent = weather[0].description.toUpperCase();
             location.insertAdjacentHTML('beforeend', `<img src=./icons/${weather[0].icon}.png>`);
             temperature.addEventListener('click', () => {
                 if(degree.textContent === '°C') {
                     degree.textContent = '°F';
-                    temperature.textContent = Math.round((main.temp-273.15)*9/5 +32);
+                    temperatureValue.textContent = Math.round((main.temp-273.15)*9/5 +32);
                 } else {
                     degree.textContent = '°C';
-                    temperature.textContent = Math.round(main.temp-273.15);
+                    temperatureValue.textContent = Math.round(main.temp-273.15);
                 }
             });
         });
