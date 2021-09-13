@@ -3,13 +3,13 @@
 window.addEventListener('load', () => {
     let longit = null;
     let latet = null;
-    const timezone = document.querySelector('.location-timezone');
-    const temperatureValue = document.querySelector('.tempeature-value'),
-    temperature = document.querySelector('.temperature'),
-     description = document.querySelector('.temperature-description'),
-     location = document.querySelector('.location'),
-     body = document.querySelector('body'),
-     degree = document.querySelector('.degree');
+    const timezone = document.querySelector('.location-timezone'),
+        temperatureValue = document.querySelector('.tempeature-value'),
+        valueSection = document.querySelector('.value-section'),
+        description = document.querySelector('.temperature-description'),
+        locationClass = document.querySelector('.location'),
+        body = document.querySelector('body'),
+        degree = document.querySelector('.degree');
     const clock = () => {
         const date = new Date();
         const hours = (date.getHours() < 10) ? '0' + date.getHours() : date.getHours(),
@@ -36,7 +36,7 @@ window.addEventListener('load', () => {
             longit = position.coords.longitude;
             latet = position.coords.latitude;
 
-            const api = `https://api.openweathermap.org/data/2.5/weather?lat=${latet}&lon=${longit}&appid=00937aadd0d49ca55c8bdf17e314bee9`;
+            const api = `http://api.weatherapi.com/v1/current.json?key=b16d149a0f7540f989b190424210909&q=56.7923,  60.63&aqi=no`;
 
             fetch(api)
         .then(response => {
@@ -44,19 +44,20 @@ window.addEventListener('load', () => {
         })
         .then(data => {
             console.log(data);
-            const {main, name, weather} = data;
+            const {current, location} = data;
 
-            timezone.textContent = name;
-            temperatureValue.textContent = Math.round(main.temp-273.15);
-            description.textContent = weather[0].description.toUpperCase();
-            location.insertAdjacentHTML('beforeend', `<img src=./icons/${weather[0].icon}.png>`);
-            temperature.addEventListener('click', () => {
+            timezone.textContent = location.tz_id;
+            temperatureValue.textContent = current.temp_c;
+            description.textContent = current.condition.text.toUpperCase();
+            console.log(current.condition.icon);
+            locationClass.insertAdjacentHTML(`beforeend`, `<img src='${current.condition.icon}'/>`);
+            valueSection.addEventListener('click', () => {
                 if(degree.textContent === '°C') {
                     degree.textContent = '°F';
-                    temperatureValue.textContent = Math.round((main.temp-273.15)*9/5 +32);
+                    temperatureValue.textContent = current.temp_f;
                 } else {
                     degree.textContent = '°C';
-                    temperatureValue.textContent = Math.round(main.temp-273.15);
+                    temperatureValue.textContent = current.temp_c;
                 }
             });
         });
