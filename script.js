@@ -62,6 +62,6 @@ window.addEventListener('load', () => {
                     });
                 });
         });
-    }
+    }else{console.error('Something wrong')}
 
 });
