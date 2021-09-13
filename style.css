@@ -12,7 +12,6 @@ body {
     align-items: center;
     color: white;
     font-family: sans-serif;
-    text-align: center;
 }
 
 .sunset {
@@ -35,7 +34,7 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    
+    text-align: center;
 }
 
 .temperature {
